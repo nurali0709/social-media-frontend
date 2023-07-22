@@ -2,20 +2,21 @@
     <div class="post-block">
       <div v-for="post in posts" :key="post.id" class="post">
         <div class="post-header">
-          <h2>{{ post.title }}</h2>
+          <h7 class="name"><strong>{{ post.author_name }} {{ post.author_surname }}</strong></h7>
           <div class="post-meta">
-            <span>By: {{ post.author_username }}</span>
-            <span>Posted on: {{ formatDate(post.created_at) }}</span>
+            <span class="username">{{ post.author_username }}</span>
           </div>
         </div>
         <div class="post-content">
+          <h2>{{ post.title }}</h2>
           <p>{{ post.description }}</p>
         </div>
         <div class="post-footer">
+          <span class="posted-on">Posted on: {{ formatDate(post.created_at) }}</span>
           <div class="post-stats">
-            <span>{{ post.views }} Views</span>
-            <span>{{ post.likes }} Likes</span>
-            <span>{{ post.dislikes }} Dislikes</span>
+            <i class="far fa-eye"></i> {{ post.views }} Views
+            <i class="far fa-thumbs-up"></i> {{ post.likes }} Likes
+            <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
           </div>
         </div>
       </div>
@@ -38,52 +39,57 @@
       fetchPosts() {
         axios.get('http://192.168.1.106:8000/post/posts')
           .then(response => {
-            this.posts = response.data;
+            // Check if the response data is an array before updating the posts
+            if (Array.isArray(response.data)) {
+              this.posts = response.data;
+            } else {
+              console.error('Invalid data format: Expected an array of posts');
+            }
           })
           .catch(error => {
-            console.error(error);
+            console.error('Error fetching posts:', error);
           });
       },
       formatDate(date) {
-      if (!date) {
-        return 'N/A'; // Return a fallback value when the date is not available
-      }
-      // Split the date into parts using "-" as the separator
-      const parts = date.split('-');
-      const year = parts[0];
-      const month = this.getMonthName(parseInt(parts[1]));
-      const day = parts[2];
-      return `${day} ${month} ${year}`;
+        if (!date) {
+          return 'N/A'; // Return a fallback value when the date is not available
+        }
+        // Split the date into parts using "-" as the separator
+        const parts = date.split('-');
+        const year = parts[0];
+        const month = this.getMonthName(parseInt(parts[1]));
+        const day = parts[2];
+        return `${day} ${month} ${year}`;
+      },
+      getMonthName(monthNumber) {
+        // Convert month number (1 to 12) to the corresponding month name
+        const monthNames = [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        return monthNames[monthNumber - 1];
+      },
     },
-    getMonthName(monthNumber) {
-      // Convert month number (1 to 12) to the corresponding month name
-      const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-      return monthNames[monthNumber - 1];
-    },
-  },
-};
-</script>
+  };
+  </script>
   
 <style>
 .post-block {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   margin: 20px 0;
+  margin-left: 450px;
+  max-width: 1000px;
 }
 
 .post {
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: calc(33.33% - 20px); 
+  width: 100%;
   margin: 10px;
   padding: 10px;
-  flex: 1 0 auto; /* Allow the post to grow to occupy the entire row width */
-  max-width: 300px; 
 }
 
 .post-header {
@@ -95,6 +101,11 @@
   color: #777;
 }
 
+.post-meta .username {
+  color: gray;
+  margin-right: 800px;
+}
+
 .post-content {
   font-size: 16px;
   line-height: 1.6;
@@ -104,15 +115,28 @@
   margin-top: 20px;
   border-top: 1px solid #ddd;
   padding-top: 10px;
-}
-
-.post-stats {
+  display: flex;
+  justify-content: flex-end; /* Align stats to the right */
   font-size: 14px;
   color: #555;
 }
-
-.post-stats span {
+.post-stats {
   margin-right: 20px;
+  width: 100%;
+}
+
+/* Add Font Awesome icons styles */
+.post-footer i {
+  margin-left: 5px;
+}
+
+.posted-on {
+    margin-right: 600px;
+    width: 100%;
+}
+
+.name {
+    margin-right: 800px;
 }
 </style>
   

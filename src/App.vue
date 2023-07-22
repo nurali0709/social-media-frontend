@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav>
+    <nav class="navbar">
       <div class="nav-logo">
         <img alt="Vue logo" src="./assets/logo.png">
       </div>
@@ -67,6 +67,16 @@ nav {
   height: 50px;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* Set your desired background color for the navigation bar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  z-index: 999; /* Ensure the navigation bar appears on top of other elements */
+}
 /* Add more styles for the PostBlock component if necessary */
 </style>
 
