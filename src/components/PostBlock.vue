@@ -18,11 +18,16 @@
           <i class="far fa-thumbs-up"></i> {{ post.likes }} Likes
           <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
         </div>
+        <!-- Use router-link to navigate to the detail page -->
+        <router-link :to="{ name: 'PostDetail', params: { id: post.id } }">
+          <button @click="openPostDetail(post.id)">View Details</button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
-  
+
+
 <script>
 export default {
   props: {
@@ -49,10 +54,13 @@ export default {
       ];
       return monthNames[monthNumber - 1];
     },
+    openPostDetail(postId) {
+      this.$emit('open-post-detail', postId);
+    },
   },
 };
 </script>
-  
+
 <style>
 .post-block {
   display: flex;
@@ -119,4 +127,3 @@ export default {
     margin-right: 800px;
 }
 </style>
-  
