@@ -8,8 +8,8 @@
       <!-- Other links here -->
     </div>
     <form @submit.prevent="searchPosts" class="search">
-      <input v-model="searchInput" type="text" placeholder="Search...">
-      <button type="submit">Search</button>
+      <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
+      <button type="submit" class="search-button">Search</button>
     </form>
   </nav>
 </template>
@@ -81,7 +81,30 @@ export default {
   }
 
   .search{
+    display: flex;
+    align-items: center;
     margin-right: 1000px;
   }
+  .search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.search-button {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
 </style>
   
