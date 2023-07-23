@@ -1,32 +1,59 @@
 <template>
   <div id="app">
-    <nav class="navbar">
-      <div class="nav-logo">
-        <img alt="Vue logo" src="./assets/logo.png">
-      </div>
-      <div class="nav-menu">
-        <router-link to="/">Home</router-link>
-        <router-link to="/search">Search</router-link>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/signup">Sign Up</router-link>
-      </div>
-    </nav>
-
+    <NavBar @search-results="handleSearchResults" />
     <router-view />
-
-    <PostBlock /> <!-- Include the PostBlock component here -->
+    <div v-if="searchData !== null">
+      <SearchResults :searchData="searchData" />
+    </div>
+    <div v-else>
+      <PostBlock :posts="posts" />
+    </div>
   </div>
 </template>
 
+
 <script>
-import PostBlock from './components/PostBlock.vue' // Import the PostBlock component
+import NavBar from './components/NavBar.vue';
+import SearchResults from './components/SearchResults.vue';
+import PostBlock from './components/PostBlock.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
   components: {
-    PostBlock // Register the PostBlock component
-  }
-}
+    NavBar,
+    SearchResults,
+    PostBlock,
+  },
+  data() {
+    return {
+      posts: [], // Posts fetched from the backend will be stored here
+      searchData: null, // Search results will be stored here
+    };
+  },
+  methods: {
+    handleSearchResults(data) {
+      this.searchData = data;
+    },
+    fetchPosts() {
+      axios.get('http://192.168.1.106:8000/post/posts')
+        .then(response => {
+          // Check if the response data is an array before updating the posts
+          if (Array.isArray(response.data)) {
+            this.posts = response.data;
+          } else {
+            console.error('Invalid data format: Expected an array of posts');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching posts:', error);
+        });
+    },
+  },
+  mounted() {
+    this.fetchPosts();
+  },
+};
 </script>
 
 <style>
@@ -38,45 +65,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #f5f5f5;
-}
-
-.nav-menu {
-  display: flex;
-}
-
-.nav-menu a {
-  text-decoration: none;
-  color: #333;
-  padding: 10px;
-  margin: 0 5px;
-  border-radius: 4px;
-}
-
-.nav-menu a:hover {
-  background-color: #ddd;
-}
-
-.nav-logo img {
-  height: 50px;
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff; /* Set your desired background color for the navigation bar */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px 20px;
-  z-index: 999; /* Ensure the navigation bar appears on top of other elements */
-}
-/* Add more styles for the PostBlock component if necessary */
 </style>
+
 

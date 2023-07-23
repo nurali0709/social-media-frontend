@@ -1,32 +1,34 @@
 <template>
-  <div class="post-block">
-    <div v-for="post in posts" :key="post.id" class="post">
+  <div class="search-results">
+    <h2>Search Results</h2>
+    <div v-for="result in searchData" :key="result.id" class="post">
       <div class="post-header">
-        <h2>{{ post.title }}</h2>
+        <h2>{{ result.title }}</h2>
         <div class="post-meta">
-          <h1><strong>{{ post.author_name }} {{ post.author_surname }}</strong></h1>
-          <span class="username">{{ post.author_username }}</span>
+          <h1><strong>{{ result.author_name }} {{ result.author_surname }}</strong></h1>
+          <span class="username">{{ result.author_username }}</span>
         </div>
       </div>
       <div class="post-content">
-        <p>{{ post.description }}</p>
+        <p>{{ result.description }}</p>
       </div>
       <div class="post-footer">
-        <span class="posted-on">Posted on: {{ formatDate(post.created_at) }}</span>
+        <span class="posted-on">Posted on: {{ formatDate(result.created_at) }}</span>
         <div class="post-stats">
-          <i class="far fa-eye"></i> {{ post.views }} Views
-          <i class="far fa-thumbs-up"></i> {{ post.likes }} Likes
-          <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
+          <i class="far fa-eye"></i> {{ result.views }} Views
+          <i class="far fa-thumbs-up"></i> {{ result.likes }} Likes
+          <i class="far fa-thumbs-down"></i> {{ result.dislikes }} Dislikes
         </div>
       </div>
     </div>
   </div>
 </template>
   
+
 <script>
 export default {
   props: {
-    posts: {
+    searchData: {
       type: Array,
       default: () => [],
     },
@@ -54,6 +56,10 @@ export default {
 </script>
   
 <style>
+.search-results{
+  margin-left: 450px;
+  max-width: 1000px;
+}
 .post-block {
   display: flex;
   flex-wrap: wrap;

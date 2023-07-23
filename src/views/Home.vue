@@ -7,11 +7,13 @@
   
   <script>
   import PostBlock from '../components/PostBlock.vue';
+  import NavBar from '@/components/NavBar.vue';
   
   export default {
     name: 'Home',
     components: {
       PostBlock,
+      NavBar
     },
   };
   </script>
