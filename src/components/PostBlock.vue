@@ -19,9 +19,9 @@
           <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
         </div>
         <!-- Use router-link to navigate to the detail page -->
-        <router-link :to="{ name: 'PostDetail', params: { id: post.id } }">
-          <button @click="openPostDetail(post.id)">View Details</button>
-        </router-link>
+        <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }">
+        <button>View Details</button>
+      </router-link>
       </div>
     </div>
   </div>
@@ -53,9 +53,6 @@ export default {
         'July', 'August', 'September', 'October', 'November', 'December'
       ];
       return monthNames[monthNumber - 1];
-    },
-    openPostDetail(postId) {
-      this.$emit('open-post-detail', postId);
     },
   },
 };

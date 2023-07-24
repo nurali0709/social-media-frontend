@@ -5,9 +5,10 @@ import PostDetail from '../components/PostDetail.vue';
 const routes = [
   { path: '/postblock', component: PostBlock },
   {
-    path: '/post/:id',
+    path: '/post/:postId',
     name: 'PostDetail',
     component: PostDetail,
+    props: true
   },
 ];
 

@@ -6,10 +6,8 @@
       <SearchResults :searchData="searchData" />
     </div>
     <div v-else>
-      <PostBlock :posts="posts" @open-post-detail="selectedPost = $event" />
+      <PostBlock :posts="posts" />
     </div>
-    <!-- Pass the selected post to the PostDetail component -->
-    <PostDetail v-if="selectedPost" :postId="selectedPost.id" @close="selectedPost.id = null" />
   </div>
 </template>
 
@@ -17,7 +15,6 @@
 import NavBar from './components/NavBar.vue';
 import SearchResults from './components/SearchResults.vue';
 import PostBlock from './components/PostBlock.vue';
-import PostDetail from './components/PostDetail.vue';
 
 import axios from 'axios';
 
@@ -27,13 +24,11 @@ export default {
     NavBar,
     SearchResults,
     PostBlock,
-    PostDetail
   },
   data() {
     return {
-      posts: [], // Posts fetched from the backend will be stored here
+      posts: [],
       searchData: null,
-      selectedPost: null, // The selected post for detailed view will be stored here
     };
   },
   methods: {

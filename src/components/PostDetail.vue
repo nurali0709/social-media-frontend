@@ -27,13 +27,14 @@ import axios from 'axios';
 
   export default {
     props: {
-        postId: {
-            type: Number,
-            required: true,
-    },
+      postId: {
+        type: String,
+        required: true,
+      },
   },
   data() {
     return {
+      localPostId: null,
       post: null,
     };
   },
@@ -65,12 +66,17 @@ import axios from 'axios';
         });
     },
   },
-  created() {
-    this.fetchPostDetails();
+  watch: {
+    postId: {
+      immediate: true, // Run the watcher immediately on component mount
+      handler(newPostId) {
+        this.localPostId = newPostId; // Update the localPostId data property
+        this.fetchPostDetails(); // Fetch post details when localPostId changes
+      },
+    },
   },
 };
 </script>
-  
 
 <style scoped>
 
