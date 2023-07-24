@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function formatDate(date) {
     if (!date) {
       return 'N/A';
@@ -16,4 +18,20 @@ export function formatDate(date) {
     ];
     return monthNames[monthNumber - 1];
   }
-  
+
+  export function fetchPosts() {
+    return axios.get('http://192.168.1.106:8000/post/posts')
+      .then(response => {
+        // Check if the response data is an array before returning the posts
+        if (Array.isArray(response.data)) {
+          return response.data;
+        } else {
+          console.error('Invalid data format: Expected an array of posts');
+          return [];
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching posts:', error);
+        return [];
+      });
+  }

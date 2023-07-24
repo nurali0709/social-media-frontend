@@ -15,8 +15,7 @@
 import NavBar from './components/NavBar.vue';
 import SearchResults from './components/SearchResults.vue';
 import PostBlock from './components/PostBlock.vue';
-
-import axios from 'axios';
+import { fetchPosts } from './utils.js';
 
 export default {
   name: 'App',
@@ -36,14 +35,9 @@ export default {
       this.searchData = data;
     },
     fetchPosts() {
-      axios.get('http://192.168.1.106:8000/post/posts')
-        .then(response => {
-          // Check if the response data is an array before updating the posts
-          if (Array.isArray(response.data)) {
-            this.posts = response.data;
-          } else {
-            console.error('Invalid data format: Expected an array of posts');
-          }
+      fetchPosts() // Call the fetchPosts function from utils.js
+        .then(posts => {
+          this.posts = posts;
         })
         .catch(error => {
           console.error('Error fetching posts:', error);
@@ -55,7 +49,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 #app {
