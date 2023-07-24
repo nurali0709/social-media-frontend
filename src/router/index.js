@@ -9,10 +9,7 @@ const routes = [
   },
   {
     path: '/post/:postId', 
-    components: { 
-      default: PostBlock, 
-      postDetail: PostDetail
-     }, 
+    component: PostDetail, 
     name: 'PostDetail', 
     props: true },
 ];
