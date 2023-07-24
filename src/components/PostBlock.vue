@@ -19,7 +19,7 @@
           <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
         </div>
         <!-- Use router-link to navigate to the detail page -->
-        <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }" target="_blank">
+        <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }">
         <button>View Details</button>
       </router-link>
       </div>

@@ -2,6 +2,7 @@
   <div id="app">
     <NavBar @search-results="handleSearchResults" />
     <router-view />
+    <router-view name="postDetail" />
     <div v-if="searchData !== null">
       <SearchResults :searchData="searchData" />
     </div>
