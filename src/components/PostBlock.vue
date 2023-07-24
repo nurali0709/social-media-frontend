@@ -19,7 +19,7 @@
           <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
         </div>
         <!-- Use router-link to navigate to the detail page -->
-        <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }">
+        <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }" target="_blank">
         <button>View Details</button>
       </router-link>
       </div>
@@ -29,6 +29,8 @@
 
 
 <script>
+import { formatDate } from '@/utils.js';
+
 export default {
   props: {
     posts: {
@@ -37,23 +39,7 @@ export default {
     },
   },
   methods: {
-    formatDate(date) {
-      if (!date) {
-        return 'N/A';
-      }
-      const parts = date.split('-');
-      const day = parts[2];
-      const month = this.getMonthName(parseInt(parts[1]));
-      const year = parts[0];
-      return `${day} ${month} ${year}`;
-    },
-    getMonthName(monthNumber) {
-      const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-      return monthNames[monthNumber - 1];
-    },
+    formatDate,
   },
 };
 </script>
