@@ -2,18 +2,12 @@
   <div id="app">
     <NavBar @search-results="handleSearchResults" />
     <router-view />
-    <div v-if="searchData !== null">
-      <SearchResults :searchData="searchData" />
-    </div>
-    <div v-else>
-      <PostBlock :posts="posts" />
-    </div>
+    <PostBlock :posts="posts" />
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
-import SearchResults from './components/SearchResults.vue';
 import PostBlock from './components/PostBlock.vue';
 import { fetchPosts } from './utils.js';
 
@@ -21,7 +15,6 @@ export default {
   name: 'App',
   components: {
     NavBar,
-    SearchResults,
     PostBlock,
   },
   data() {

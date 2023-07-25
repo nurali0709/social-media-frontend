@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import PostBlock from '@/components/PostBlock.vue';
 import PostDetail from '@/components/PostDetail.vue';
+import SearchResults from '@/components/SearchResults.vue';
 
 const routes = [
   { 
@@ -12,6 +13,11 @@ const routes = [
     component: PostDetail, 
     name: 'PostDetail', 
     props: true },
+  {
+    path: '/search-results',
+    component: SearchResults,
+    props: route => ({ searchData: JSON.parse(route.query.data) })
+    }  
 ];
 
 const router = createRouter({

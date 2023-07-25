@@ -6,6 +6,7 @@
     <div class="nav-menu">
       <router-link to="/">Home</router-link>
       <!-- Other links here -->
+      <router-link v-if="searchButtonClicked" to="/search-results"></router-link>
     </div>
     <form @submit.prevent="searchPosts" class="search">
       <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
@@ -21,6 +22,7 @@ export default {
   data() {
     return {
       searchInput: '',
+      searchButtonClicked: false,
     };
   },
   methods: {
@@ -29,8 +31,12 @@ export default {
 
       axios.get(url)
         .then(response => {
-          // Emit the search results to the parent component
-          this.$emit('search-results', response.data);
+          // Navigate to the search results page with query params
+          this.$router.push({
+            path: '/search-results',
+            query: { data: JSON.stringify(response.data) },
+          });
+          this.searchButtonClicked = true;
         })
         .catch(error => {
           console.error(error);
