@@ -1,6 +1,6 @@
 <template>
   <div class="post-block">
-    <div v-for="post in posts" :key="post.id" class="post">
+    <div v-for="post in localPosts" :key="post.id" class="post">
       <div class="post-header">
         <h2>{{ post.title }}</h2>
         <div class="post-meta">
@@ -29,6 +29,7 @@
 
 
 <script>
+import { fetchPosts } from '@/utils.js';
 import { formatDate } from '@/utils.js';
 
 export default {
@@ -38,8 +39,31 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      localPosts: [],
+    };
+  },
   methods: {
     formatDate,
+    fetchPosts() {
+      fetchPosts()
+        .then(posts => {
+          this.localPosts = posts;
+        })
+        .catch(error => {
+          console.error('Error fetching posts:', error);
+        });
+    },
+  },
+  watch: {
+    posts(newPosts) {
+      // Update localPosts when the posts prop changes
+      this.localPosts = newPosts;
+    },
+  },
+  mounted() {
+    this.fetchPosts(); // Fetch posts when the component is mounted
   },
 };
 </script>
