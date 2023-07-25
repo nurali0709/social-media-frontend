@@ -84,6 +84,12 @@ export default {
   created() {
     this.fetchPostDetails();
   },
+  watch: {
+    postId() {
+      // Watch for changes in the postId prop and fetch new post details
+      this.fetchPostDetails();
+    },
+  },
 };
 </script>
 
