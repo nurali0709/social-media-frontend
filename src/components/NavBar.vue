@@ -6,7 +6,7 @@
     <div class="nav-menu">
       <router-link to="/">Home</router-link>
       <!-- Other links here -->
-      <router-link v-if="searchButtonClicked" to="/search-results"></router-link>
+      <router-link to="/search-results"></router-link>
     </div>
     <form @submit.prevent="searchPosts" class="search">
       <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
@@ -16,35 +16,24 @@
 </template>
   
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
       searchInput: '',
-      searchButtonClicked: false,
     };
   },
   methods: {
     searchPosts() {
-      const url = `http://192.168.1.106:8000/post/search?q=${this.searchInput}`;
-
-      axios.get(url)
-        .then(response => {
-          // Navigate to the search results page with query params
-          this.$router.push({
-            path: '/search-results',
-            query: { data: JSON.stringify(response.data) },
-          });
-          this.searchButtonClicked = true;
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      // Use Vue router to navigate to the search results route with the query parameter
+      this.$router.push({
+        path: '/search-results',
+        query: { q: this.searchInput },
+      });
     },
   },
 };
 </script>
+
   
 <style scoped>
   nav {

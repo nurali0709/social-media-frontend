@@ -1,5 +1,5 @@
 <template>
-  <div class="search-results">
+  <div v-if="searchData.length > 0" class="search-results">
     <h2>Search Results</h2>
     <div v-for="result in searchData" :key="result.id" class="post">
       <div class="post-header">
@@ -22,22 +22,52 @@
       </div>
     </div>
   </div>
+  <div v-else >
+    <p>No results found for "{{ searchQuery }}"</p>
+  </div>
 </template>
   
 
 <script>
 
+import axios from 'axios';
 import { formatDate } from '@/utils.js';
 
 export default {
   props: {
-    searchData: {
-      type: Array,
-      default: () => [],
+    searchQuery: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      searchData: [],
+    };
+  },
+  created() {
+    // Fetch data using the 'searchQuery' parameter
+    this.fetchSearchResults();
+  },
+  watch: {
+    // Watch for changes to the 'searchQuery' prop and fetch new data accordingly
+    searchQuery: function () {
+      this.fetchSearchResults();
     },
   },
   methods: {
     formatDate,
+    fetchSearchResults() {
+      const url = `http://192.168.1.106:8000/post/search?q=${this.searchQuery}`;
+      axios
+        .get(url)
+        .then(response => {
+          this.searchData = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>
