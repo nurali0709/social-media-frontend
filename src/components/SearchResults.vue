@@ -26,6 +26,9 @@
   
 
 <script>
+
+import { formatDate } from '@/utils.js';
+
 export default {
   props: {
     searchData: {
@@ -34,23 +37,7 @@ export default {
     },
   },
   methods: {
-    formatDate(date) {
-      if (!date) {
-        return 'N/A';
-      }
-      const parts = date.split('-');
-      const day = parts[2];
-      const month = this.getMonthName(parseInt(parts[1]));
-      const year = parts[0];
-      return `${day} ${month} ${year}`;
-    },
-    getMonthName(monthNumber) {
-      const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-      return monthNames[monthNumber - 1];
-    },
+    formatDate,
   },
 };
 </script>
