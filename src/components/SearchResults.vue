@@ -2,30 +2,29 @@
   <div v-if="searchData.length > 0" class="search-results">
     <h2>Search Results: </h2>
     <div v-for="result in searchData" :key="result.id" class="post">
-      <div class="post-header">
-        <h2>{{ result.title }}</h2>
-        <div class="post-meta">
-          <h1><strong>{{ result.author_name }} {{ result.author_surname }}</strong></h1>
-          <span class="username">{{ result.author_username }}</span>
+      <router-link class="post-underline" :to="{ name: 'PostDetail', params: { postId: result.id } }">
+        <div class="post-header">
+          <h2>{{ result.title }}</h2>
+          <div class="post-meta">
+            <h1><strong>{{ result.author_name }} {{ result.author_surname }}</strong></h1>
+            <span class="username">{{ result.author_username }}</span>
+          </div>
         </div>
-      </div>
-      <div class="post-content">
-        <p>{{ result.description }}</p>
-      </div>
-      <div class="post-footer">
-        <span class="posted-on">Posted on: {{ formatDate(result.created_at) }}</span>
-        <div class="post-stats">
-          <i class="far fa-eye"></i> {{ result.views }} Views
-          <i class="far fa-thumbs-up"></i> {{ result.likes }} Likes
-          <i class="far fa-thumbs-down"></i> {{ result.dislikes }} Dislikes
+        <div class="post-content">
+          <p class="truncate">{{ result.description }}</p>
         </div>
-        <router-link :to="{ name: 'PostDetail', params: { postId: result.id } }">
-              <button>View Details</button>
-        </router-link>
-      </div>
+        <div class="post-footer">
+          <span class="posted-on">Posted on: {{ formatDate(result.created_at) }}</span>
+          <div class="post-stats">
+            <i class="far fa-eye"></i> {{ result.views }} Views
+            <i class="far fa-thumbs-up"></i> {{ result.likes }} Likes
+            <i class="far fa-thumbs-down"></i> {{ result.dislikes }} Dislikes
+          </div>
+        </div>
+      </router-link>
     </div>
   </div>
-  <div v-else >
+  <div v-else>
     <p>No results found for "{{ searchQuery }}"</p>
   </div>
 </template>
@@ -96,6 +95,10 @@ export default {
   width: 100%;
   margin: 10px;
   padding: 10px;
+}
+
+.post-underline {
+  text-decoration: none;
 }
 
 .post-header {
