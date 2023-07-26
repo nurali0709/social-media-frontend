@@ -6,7 +6,7 @@
         <span class="username">{{ post.author.username }}</span>
       </div>
       <div class="posted-on">
-        Posted on: {{ formatDate(post.created_at) }}
+        {{ formatDate(post.created_at) }}
       </div>
     </div>
     <h2 class="title">{{ post.title }}</h2>
@@ -14,35 +14,33 @@
       <p>{{ post.description }}</p>
     </div>
     <div class="post-stats">
-      <i class="far fa-eye"></i> {{ post.views }} Views
-      <i class="far fa-thumbs-up"></i> {{ post.likes }} Likes
-      <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
+      <i class="far fa-eye"></i> {{ post.views }}
+      <i class="far fa-thumbs-up"></i> {{ post.likes }}
+      <i class="far fa-thumbs-down"></i> {{ post.dislikes }}
     </div>
     <div>
-      <h3>Recommendations</h3>
+      <h3>You may also like:</h3>
       <div class="recommendations">
         <div
           v-for="recommendation in recommendations"
           :key="recommendation.id"
           class="recommendation-card"
         >
-          <div class="post-header">
+        <router-link class="post-underline" :to="{ name: 'PostDetail', params: { postId: recommendation.id } }">
+          <div class="card-header">
             <h2 class="title">{{ recommendation.title }}</h2>
           </div>
-          <div class="post-content">
-            <p>{{ recommendation.description }}</p>
+          <div class="card-content">
+            <p class="truncate">{{ recommendation.description }}</p>
           </div>
-          <div class="post-footer">
+          <div class="card-footer">
             <div class="post-stats">
-              <i class="far fa-eye"></i> {{ recommendation.views }} Views
-              <i class="far fa-thumbs-up"></i> {{ recommendation.likes }} Likes
-              <i class="far fa-thumbs-down"></i> {{ recommendation.dislikes }} Dislikes
+              <i class="far fa-eye"></i> {{ recommendation.views }}
+              <i class="far fa-thumbs-up"></i> {{ recommendation.likes }}
+              <i class="far fa-thumbs-down"></i> {{ recommendation.dislikes }}
             </div>
-            <!-- Use router-link to navigate to the detail page -->
-            <router-link :to="{ name: 'PostDetail', params: { postId: recommendation.id } }">
-              <button>View Details</button>
-            </router-link>
           </div>
+        </router-link>
         </div>
       </div>
     </div>
@@ -136,5 +134,58 @@ export default {
 .title {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.recommendation-card {
+  flex-basis: calc(33.33% - 40px); /* 20px is the margin space between cards */
+  max-width: calc(33.33% - 40px); /* 20px is the margin space between cards */
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
+}
+
+.card-header {
+  margin-bottom: 10px;
+}
+
+.card-header h2 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.card-content {
+  font-size: 16px;
+  line-height: 1.6;
+  height: 100px; /* Limit the height of the content */
+  overflow: hidden;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.card-footer button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.card-footer button:hover {
+  background-color: #0056b3;
 }
 </style>

@@ -14,11 +14,11 @@
           <p class="truncate">{{ result.description }}</p>
         </div>
         <div class="post-footer">
-          <span class="posted-on">Posted on: {{ formatDate(result.created_at) }}</span>
+          <span class="posted-on">{{ formatDate(result.created_at) }}</span>
           <div class="post-stats">
-            <i class="far fa-eye"></i> {{ result.views }} Views
-            <i class="far fa-thumbs-up"></i> {{ result.likes }} Likes
-            <i class="far fa-thumbs-down"></i> {{ result.dislikes }} Dislikes
+            <i class="far fa-eye"></i> {{ result.views }}
+            <i class="far fa-thumbs-up"></i> {{ result.likes }}
+            <i class="far fa-thumbs-down"></i> {{ result.dislikes }}
           </div>
         </div>
       </router-link>
