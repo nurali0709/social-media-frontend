@@ -1,6 +1,6 @@
 <template>
   <div class="post-block">
-    <div v-for="post in localPosts" :key="post.id" class="post">
+    <router-link v-for="post in localPosts" :key="post.id" class="post" :to="{ name: 'PostDetail', params: { postId: post.id } }">
       <div class="post-meta">
         <h1><strong>{{ post.author_name }} {{ post.author_surname }}</strong></h1>
         <span class="username">{{ post.author_username }}</span>
@@ -18,12 +18,8 @@
           <i class="far fa-thumbs-up"></i> {{ post.likes }}
           <i class="far fa-thumbs-down"></i> {{ post.dislikes }}
         </div>
-        <!-- Use router-link to navigate to the detail page -->
-        <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }">
-        <button>View Details</button>
-      </router-link>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -85,6 +81,7 @@ export default {
   width: 100%;
   margin: 10px;
   padding: 10px;
+  text-decoration: none;
 }
 
 .post-meta {
