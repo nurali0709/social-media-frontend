@@ -10,7 +10,9 @@
     </div>
     <form @submit.prevent="searchPosts" class="search">
       <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
-      <button type="submit" class="search-button">Search</button>
+      <button type="submit">
+        <i class="fas fa-search"></i>
+      </button>
     </form>
   </nav>
 </template>
@@ -29,6 +31,14 @@ export default {
         path: '/search-results',
         query: { q: this.searchInput },
       });
+    },
+  },
+  watch: {
+    $route(to, from) {
+      // Clear the search input when the route changes
+      if (to.path !== '/search-results' && from.path === '/search-results') {
+        this.searchInput = '';
+      }
     },
   },
 };
@@ -100,6 +110,14 @@ export default {
 
 .search-button:hover {
   background-color: #0056b3;
+}
+
+.fa-search {
+  font-size: 18px;
+  margin-right: 5px;
+  height: 30px;
+  color: grey;
+  cursor: pointer;
 }
 </style>
   
