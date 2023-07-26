@@ -7,7 +7,7 @@
       </div>
       <h2 class="title">{{ post.title }}</h2>
       <div class="post-content">
-        <p>{{ post.description }}</p>
+        <p class="truncate">{{ post.description }}</p>
       </div>
       <div class="post-footer">
         <div class="posted-on">
@@ -97,7 +97,7 @@ export default {
 
 .post-meta .username {
   color: gray;
-  /* margin-right: 800px; */
+  margin-right: 800px;
 }
 
 .title {
@@ -110,12 +110,20 @@ export default {
   line-height: 1.6;
 }
 
+.post-content .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Number of lines to show before truncation */
+  -webkit-box-orient: vertical;
+}
+
 .post-footer {
   margin-top: 20px;
   border-top: 1px solid #ddd;
   padding-top: 10px;
   display: flex;
-  justify-content: flex-end; /* Align stats to the right */
+  justify-content: flex-end;
   font-size: 14px;
   color: #555;
 }
@@ -124,7 +132,6 @@ export default {
   width: 100%;
 }
 
-/* Add Font Awesome icons styles */
 .post-footer i {
   margin-left: 5px;
 }
