@@ -1,6 +1,6 @@
 <template>
   <div v-if="searchData.length > 0" class="search-results">
-    <h2>Search Results</h2>
+    <h2>Search Results: </h2>
     <div v-for="result in searchData" :key="result.id" class="post">
       <div class="post-header">
         <h2>{{ result.title }}</h2>
@@ -19,6 +19,9 @@
           <i class="far fa-thumbs-up"></i> {{ result.likes }} Likes
           <i class="far fa-thumbs-down"></i> {{ result.dislikes }} Dislikes
         </div>
+        <router-link :to="{ name: 'PostDetail', params: { postId: result.id } }">
+              <button>View Details</button>
+        </router-link>
       </div>
     </div>
   </div>
