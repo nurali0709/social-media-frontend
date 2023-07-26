@@ -1,22 +1,22 @@
 <template>
   <div class="post-block">
     <div v-for="post in localPosts" :key="post.id" class="post">
-      <div class="post-header">
-        <h2>{{ post.title }}</h2>
-        <div class="post-meta">
-          <h1><strong>{{ post.author_name }} {{ post.author_surname }}</strong></h1>
-          <span class="username">{{ post.author_username }}</span>
-        </div>
+      <div class="post-meta">
+        <h1><strong>{{ post.author_name }} {{ post.author_surname }}</strong></h1>
+        <span class="username">{{ post.author_username }}</span>
       </div>
+      <h2 class="title">{{ post.title }}</h2>
       <div class="post-content">
         <p>{{ post.description }}</p>
       </div>
       <div class="post-footer">
-        <span class="posted-on">Posted on: {{ formatDate(post.created_at) }}</span>
+        <div class="posted-on">
+          {{ formatDate(post.created_at) }}
+        </div>
         <div class="post-stats">
-          <i class="far fa-eye"></i> {{ post.views }} Views
-          <i class="far fa-thumbs-up"></i> {{ post.likes }} Likes
-          <i class="far fa-thumbs-down"></i> {{ post.dislikes }} Dislikes
+          <i class="far fa-eye"></i> {{ post.views }}
+          <i class="far fa-thumbs-up"></i> {{ post.likes }}
+          <i class="far fa-thumbs-down"></i> {{ post.dislikes }}
         </div>
         <!-- Use router-link to navigate to the detail page -->
         <router-link :to="{ name: 'PostDetail', params: { postId: post.id } }">
@@ -87,18 +87,22 @@ export default {
   padding: 10px;
 }
 
-.post-header {
-  margin-bottom: 10px;
-}
-
 .post-meta {
   font-size: 14px;
   color: #777;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .post-meta .username {
   color: gray;
-  margin-right: 800px;
+  /* margin-right: 800px; */
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .post-content {
