@@ -14,9 +14,10 @@
       <p>{{ post.description }}</p>
     </div>
     <div class="post-stats">
-      <i class="far fa-eye"></i> {{ post.views }}
-      <i class="far fa-thumbs-up"></i> {{ post.likes }}
-      <i class="far fa-thumbs-down"></i> {{ post.dislikes }}
+      <i class="far fa-eye">{{ post.views }}</i>
+      <i class="far fa-thumbs-up">{{ post.likes }}</i>
+      <i class="far fa-thumbs-down">{{ post.dislikes }}</i>
+      <i class="far fa-comment">{{ post.total_num_comments }}</i>
     </div>
     <div>
       <h3>You may also like:</h3>
@@ -128,7 +129,7 @@ export default {
 }
 
 .post-stats i {
-  margin-right: 5px;
+  margin-right: 15px;
 }
 
 .title {

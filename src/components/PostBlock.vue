@@ -17,6 +17,7 @@
           <i class="far fa-eye"></i> {{ post.views }}
           <i class="far fa-thumbs-up"></i> {{ post.likes }}
           <i class="far fa-thumbs-down"></i> {{ post.dislikes }}
+          <i class="far fa-comment"></i> {{ post.comments }}
         </div>
       </div>
     </router-link>
