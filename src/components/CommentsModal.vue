@@ -7,17 +7,29 @@
         <h2>Comments</h2>
         <ul>
           <li v-for="comment in localComments" :key="comment.id">
-            {{ comment.text }}
-            <ul v-if="comment.responses">
+            <div class="comment-block">
+              <div class="comment-header">
+                <span class="user-name">{{ comment.user_name }}</span>
+                <span class="user-surname">{{ comment.user_surname }}</span>
+              </div>
+              <div class="comment-text">{{ comment.text }}</div>
+            </div>
+            <ul v-if="comment.responses" class="response-list">
               <li v-for="response in comment.responses" :key="response.id">
-                {{ response.text }}
+                <div class="comment-block">
+                  <div class="comment-header">
+                    <span class="user-name">{{ response.user_name }}</span>
+                    <span class="user-surname">{{ response.user_surname }}</span>
+                  </div>
+                  <div class="comment-text">{{ response.text }}</div>
+                </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
-  </template>
+</template>
 
 <script>
 import axios from 'axios';
@@ -102,6 +114,30 @@ import axios from 'axios';
 
 .modal-content li {
   margin-bottom: 10px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.user-name {
+  margin-right: 5px;
+}
+
+.user-surname {
+  color: #777;
+}
+
+.comment-text {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.response-list {
+  margin-left: 20px;
 }
 
 .close-button {
