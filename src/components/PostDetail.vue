@@ -17,7 +17,13 @@
       <i class="far fa-eye">{{ post.views }}</i>
       <i class="far fa-thumbs-up">{{ post.likes }}</i>
       <i class="far fa-thumbs-down">{{ post.dislikes }}</i>
-      <i class="far fa-comment">{{ post.total_num_comments }}</i>
+      <button @click="showCommentsModal = true" class="comment"><i class="far fa-comment">{{ post.total_num_comments }}</i></button>
+      <comments-modal
+        v-show="showCommentsModal"
+        :post-id="post.id"
+        :comments="post.comments"
+        @close="showCommentsModal = false"
+      ></comments-modal>
     </div>
     <div>
       <h3>You may also like:</h3>
@@ -51,6 +57,7 @@
 <script>
 import axios from 'axios';
 import { formatDate } from '@/utils.js';
+import CommentsModal from '@/components/CommentsModal.vue';
 
 export default {
   props: {
@@ -59,10 +66,14 @@ export default {
       required: true,
     },
   },
+  components: {
+    CommentsModal
+  },
   data() {
     return {
       post: null,
       recommendations: [],
+      showCommentsModal: false,
     };
   },
   methods: {
@@ -132,6 +143,10 @@ export default {
   margin-right: 15px;
 }
 
+.comment{
+  cursor: pointer;
+}
+
 .title {
   text-align: center;
   margin-bottom: 20px;
@@ -145,8 +160,8 @@ export default {
 }
 
 .recommendation-card {
-  flex-basis: calc(33.33% - 40px); /* 20px is the margin space between cards */
-  max-width: calc(33.33% - 40px); /* 20px is the margin space between cards */
+  flex-basis: calc(33.33% - 40px);
+  max-width: calc(33.33% - 40px);
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
