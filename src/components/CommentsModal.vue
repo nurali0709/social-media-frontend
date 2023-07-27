@@ -5,7 +5,7 @@
       </button>
       <div class="modal-content">
         <h2>Comments</h2>
-        <ul>
+        <ul v-if="localComments.length > 0">
           <li v-for="comment in localComments" :key="comment.id">
             <div class="comment-block">
               <div class="comment-header">
@@ -27,6 +27,7 @@
             </ul>
           </li>
         </ul>
+        <p v-else>No Comments Yet</p>
       </div>
     </div>
 </template>
