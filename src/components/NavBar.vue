@@ -10,9 +10,9 @@
     </div>
     <form @submit.prevent="searchPosts" class="search">
       <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
-      <button type="submit">
-        <i class="fas fa-search"></i>
-      </button>
+      <span class="icon"> 
+        <svg width="19px" height="19px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </span>
     </form>
   </nav>
 </template>
@@ -85,39 +85,49 @@ export default {
     z-index: 999; /* Ensure the navigation bar appears on top of other elements */
   }
 
-  .search{
-    display: flex;
-    align-items: center;
-    margin-right: 1000px;
-  }
+  .search {
+  width: 220px;
+  position: relative;
+  margin-right: 1000px;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 5px);
+  transform: translateY(calc(-50% - 5px));
+}
   .search-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-  font-size: 16px;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  transition: .2s linear;
+  border: 2.5px solid black;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.search-button {
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 16px;
-  cursor: pointer;
+.search-input:focus {
+  outline: none;
+  border: 0.5px solid black;
+  box-shadow: -5px -5px 0px black;
 }
 
-.search-button:hover {
-  background-color: #0056b3;
+.search:hover > .icon {
+  animation: anim 1s linear infinite;
 }
 
-.fa-search {
-  font-size: 18px;
-  margin-right: 5px;
-  height: 30px;
-  color: grey;
-  cursor: pointer;
+@keyframes anim {
+  0%,
+  100% {
+    transform: translateY(calc(-50% - 5px)) scale(1);
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 5px)) scale(1.1);
+  }
 }
+
 </style>
   
