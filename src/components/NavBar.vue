@@ -46,7 +46,7 @@ export default {
 
   
 <style scoped>
-  nav {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,11 +54,11 @@ export default {
     background-color: #f5f5f5;
   }
   
-  .nav-menu {
+.nav-menu {
     display: flex;
   }
   
-  .nav-menu a {
+.nav-menu a {
     text-decoration: none;
     color: #333;
     padding: 10px;
@@ -66,15 +66,15 @@ export default {
     border-radius: 4px;
   }
   
-  .nav-menu a:hover {
+.nav-menu a:hover {
     background-color: #ddd;
   }
   
-  .nav-logo img {
+.nav-logo img {
     height: 50px;
   }
   
-  .navbar {
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -85,7 +85,7 @@ export default {
     z-index: 999; /* Ensure the navigation bar appears on top of other elements */
   }
 
-  .search {
+.search {
   width: 220px;
   position: relative;
   margin-right: 1000px;
@@ -97,7 +97,7 @@ export default {
   top: calc(50% + 5px);
   transform: translateY(calc(-50% - 5px));
 }
-  .search-input {
+.search-input {
   width: 100%;
   height: 40px;
   padding: 10px;
@@ -130,4 +130,3 @@ export default {
 }
 
 </style>
-  
