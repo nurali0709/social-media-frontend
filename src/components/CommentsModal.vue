@@ -11,6 +11,7 @@
               <div class="comment-header">
                 <span class="user-name">{{ comment.user_name }}</span>
                 <span class="user-surname">{{ comment.user_surname }}</span>
+                <span class="comment-date">{{ formatDate(comment.created_comment) }}</span>
               </div>
               <div class="comment-text">{{ comment.text }}</div>
             </div>
@@ -20,6 +21,7 @@
                   <div class="comment-header">
                     <span class="user-name">{{ response.user_name }}</span>
                     <span class="user-surname">{{ response.user_surname }}</span>
+                    <span class="comment-date">{{ formatDate(response.created_response) }}</span>
                   </div>
                   <div class="comment-text">{{ response.text }}</div>
                 </div>
@@ -34,6 +36,7 @@
 
 <script>
 import axios from 'axios';
+import { formatDate } from '@/utils.js';
 
   export default {
     props: {
@@ -56,6 +59,7 @@ import axios from 'axios';
     };
   },
   methods: {
+    formatDate,
     closeModal() {
       this.$emit('close');
     },
