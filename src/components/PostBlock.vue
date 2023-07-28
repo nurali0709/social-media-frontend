@@ -2,8 +2,13 @@
   <div class="post-block">
     <router-link v-for="post in localPosts" :key="post.id" class="post" :to="{ name: 'PostDetail', params: { postId: post.id } }">
       <div class="post-meta">
-        <h1><strong>{{ post.author_name }} {{ post.author_surname }}</strong></h1>
-        <span class="username">{{ post.author_username }}</span>
+        <h3 class="name">
+          <strong>{{ post.author_name }} {{ post.author_surname }}</strong>
+        </h3>
+        <div class="name-info">
+          <span class="dot">.</span>
+          <span class="username">{{ post.author_username }}</span>
+        </div>
       </div>
       <h2 class="title">{{ post.title }}</h2>
       <div class="post-content">
@@ -87,15 +92,30 @@ export default {
 
 .post-meta {
   font-size: 14px;
-  color: #777;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start; /* Align items to the top */
   margin-bottom: 10px;
 }
 
-.post-meta .username {
-  color: gray;
-  margin-right: 800px;
+.name {
+  color: rgb(70, 47, 47);
+}
+
+.dot {
+  color: rgb(70, 47, 47);
+  margin-right: 5px; /* Adjust the right margin as needed */
+}
+
+.username {
+  color: rgb(70, 47, 47);
+}
+
+.name-info {
+  display: flex;
+  align-items: center;
+  margin-left: -810px;
+  margin-top: 20px;
 }
 
 .title {
@@ -139,7 +159,4 @@ export default {
     width: 100%;
 }
 
-.name {
-    margin-right: 800px;
-}
 </style>
