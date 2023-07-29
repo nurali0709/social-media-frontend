@@ -4,9 +4,12 @@
       <!-- Your logo here -->
     </div>
     <div class="nav-menu">
-      <router-link to="/">Home</router-link>
+      <router-link to="/" class="home">Home</router-link>
+      <div class="login-register">
+        <router-link to="" class="button">Login</router-link>
+        <router-link to="" class="button">Register</router-link>
+      </div>
       <!-- Other links here -->
-      <router-link to="/search-results"></router-link>
     </div>
     <form @submit.prevent="searchPosts" class="search">
       <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
@@ -46,6 +49,7 @@ export default {
 
   
 <style scoped>
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -56,34 +60,93 @@ nav {
   
 .nav-menu {
     display: flex;
+    align-items: center;
+    gap: 3rem;
+    list-style: none;
   }
   
 .nav-menu a {
-    text-decoration: none;
-    color: #333;
+    color: #DAFFFB;
     padding: 10px;
-    margin: 0 5px;
-    border-radius: 4px;
+    text-transform: uppercase;
+    transition: 0.2s;
+    text-decoration: none;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -o-transition: 0.2s;
   }
-  
-.nav-menu a:hover {
-    background-color: #ddd;
-  }
-  
-.nav-logo img {
-    height: 50px;
-  }
+
+.nav-menu::after {
+    content: '';
+    display: block;
+    border-top: 2px solid #DAFFFB;
+    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    -webkit-transition: transform 250ms ease-in-out;
+    -moz-transition: transform 250ms ease-in-out;
+    -ms-transition: transform 250ms ease-in-out;
+    -o-transition: transform 250ms ease-in-out;
+}
+
+.nav-menu:hover::after {
+    transform: scaleX(0.8);
+    -webkit-transform: scaleX(0.8);
+    -moz-transform: scaleX(0.8);
+    -ms-transform: scaleX(0.8);
+    -o-transform: scaleX(0.8);
+}
+
+.nav-menu .home:hover {
+  border-bottom: 2px solid #DAFFFB;
+}
+
   
 .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    width: 100%;
+    height: 70px;
+    background: #176B87;
+    color: #DAFFFB;
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fff; /* Set your desired background color for the navigation bar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
-    z-index: 999; /* Ensure the navigation bar appears on top of other elements */
-  }
+}
+
+.login-register {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.button {
+    color: #DAFFFB;
+    border: 2px solid #DAFFFB;
+    padding: 5px 20px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    transition: all ease-in 0.3s;
+    -webkit-transition: all ease-in 0.3s;
+    -moz-transition: all ease-in 0.3s;
+    -ms-transition: all ease-in 0.3s;
+    -o-transition: all ease-in 0.3s;
+}
+
+.button:hover {
+    background: #DAFFFB;
+    color: #176B87;
+    transition: 1s;
+}
 
 .search {
   width: 220px;
