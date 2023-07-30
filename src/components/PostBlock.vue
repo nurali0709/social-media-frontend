@@ -121,11 +121,13 @@ export default {
 .title {
   font-weight: bold;
   margin-bottom: 10px;
+  color: black;
 }
 
 .post-content {
   font-size: 16px;
   line-height: 1.6;
+  color: grey;
 }
 
 .post-content .truncate {

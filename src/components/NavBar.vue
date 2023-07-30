@@ -3,7 +3,12 @@
     <div class="nav-logo">
       <!-- Your logo here -->
     </div>
-    <div class="nav-menu">
+    <div class="bars" @click="toggleNavItems">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="nav-menu" :class="{ active: navItemsActive }">
       <router-link to="/" class="home">Home</router-link>
       <div class="login-register">
         <router-link to="" class="button">Login</router-link>
@@ -25,6 +30,7 @@ export default {
   data() {
     return {
       searchInput: '',
+      navItemsActive: false,
     };
   },
   methods: {
@@ -34,6 +40,10 @@ export default {
         path: '/search-results',
         query: { q: this.searchInput },
       });
+    },
+    toggleNavItems() {
+      // Toggle the navItemsActive property to show/hide navigation items
+      this.navItemsActive = !this.navItemsActive;
     },
   },
   watch: {
@@ -103,6 +113,10 @@ nav {
 
 .nav-menu .home:hover {
   border-bottom: 2px solid #DAFFFB;
+}
+
+.home {
+  margin-left: 50px;
 }
 
   
@@ -190,6 +204,73 @@ nav {
   50% {
     transform: translateY(calc(-50% - 5px)) scale(1.1);
   }
+}
+
+@media(max-width: 1000px) {
+    .navbar {
+        padding: 0 1rem;
+    }
+
+    .navbar .nav-menu {
+        gap: 0.1rem;
+    }
+
+    .navbar .nav-menu a,
+    .navbar .nav-menu .login-register .button {
+        font-size: 0.9rem;
+    }
+}
+
+@media(max-width: 700px) {
+    .navbar .nav-menu {
+        flex-direction: column;
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 100vw;
+        height: 100vh;
+        padding: 1rem 0;
+        z-index: 99;
+        background: #2590B5;
+        transition: 0.2s ease-in;
+        -webkit-transition: 0.2s ease-in;
+        -moz-transition: 0.2s ease-in;
+        -ms-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+    }
+
+    .bars {
+        width: 22px;
+        height: auto;
+        cursor: pointer;
+    }
+
+    .bars .bar {
+        width: 100%;
+        height: 2px;
+        background: #DAFFFB;
+        margin: 5px;
+    }
+
+    .navbar .nav-menu {
+        gap: 3rem;
+    }
+
+    .navbar .nav-menu .login-register {
+        width: 50%;
+        text-align: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .navbar .nav-menu .login-register .button {
+        padding: 1rem 0;
+    }
+
+}
+
+.navbar .nav-menu.active {
+    right: 0;
 }
 
 </style>

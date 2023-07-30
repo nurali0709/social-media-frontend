@@ -25,7 +25,7 @@
     </div>
   </div>
   <div v-else>
-    <p>No results found for "{{ searchQuery }}"</p>
+    <p class="no-results">No results found for "{{ searchQuery }}"</p>
   </div>
 </template>
   
@@ -77,6 +77,7 @@ export default {
 <style>
 .search-results{
   margin-left: 450px;
+  margin-top: 100px;
   max-width: 1000px;
 }
 .post-block {
@@ -146,6 +147,10 @@ export default {
 
 .name {
     margin-right: 800px;
+}
+
+.no-results {
+  margin-top: 500px;
 }
 </style>
   
