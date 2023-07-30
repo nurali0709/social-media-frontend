@@ -1,21 +1,22 @@
 <template>
-    <div class="comments-modal">
-      <button class="close-button" @click="closeModal">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="modal-content">
-        <h2>Comments</h2>
-        <ul v-if="localComments.length > 0">
-          <li v-for="comment in localComments" :key="comment.id">
-            <div class="comment-block">
-              <div class="comment-header">
-                <span class="user-name">{{ comment.user_name }}</span>
-                <span class="user-surname">{{ comment.user_surname }}</span>
-                <span class="comment-date">{{ formatDate(comment.created_comment) }}</span>
-              </div>
-              <div class="comment-text">{{ comment.text }}</div>
+  <div class="comments-modal">
+    <button class="close-button" @click="closeModal">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="modal-content">
+      <h2>Comments</h2>
+      <ul v-if="localComments.length > 0">
+        <li v-for="comment in localComments" :key="comment.id">
+          <div class="comment-block">
+            <div class="comment-heading" @click="toggleComment(comment)">
+              <span class="user-name">{{ comment.user_name }}</span>
+              <span class="user-surname">{{ comment.user_surname }}</span>
+              <span class="comment-date">{{ formatDate(comment.created_comment) }}</span>
+              <span v-if="comment.showResponses" class="comment-toggle">Click to hide</span>
+              <span v-else class="comment-toggle">Click to show</span>
             </div>
-            <ul v-if="comment.responses" class="response-list">
+            <div class="comment-text" v-if="comment.showResponses">{{ comment.text }}</div>
+            <ul v-if="comment.showResponses" class="response-list">
               <li v-for="response in comment.responses" :key="response.id">
                 <div class="comment-block">
                   <div class="comment-header">
@@ -27,12 +28,14 @@
                 </div>
               </li>
             </ul>
-          </li>
-        </ul>
-        <p v-else>No Comments Yet</p>
-      </div>
+          </div>
+        </li>
+      </ul>
+      <p v-else>No Comments Yet</p>
     </div>
+  </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -62,6 +65,9 @@ import { formatDate } from '@/utils.js';
     formatDate,
     closeModal() {
       this.$emit('close');
+    },
+    toggleComment(comment) {
+      comment.showResponses = !comment.showResponses;
     },
     fetchComments() {
       const url = `http://127.0.0.1:8000/comment/comments/${this.postId}`;
@@ -121,24 +127,49 @@ import { formatDate } from '@/utils.js';
   margin-bottom: 10px;
 }
 
-.comment-header {
+.comment-heading {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
-  font-weight: bold;
+  height: 50px;
+  font-size: 14px;
+  position: relative;
 }
 
 .user-name {
   margin-right: 5px;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .user-surname {
   color: #777;
 }
 
+.comment-date {
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: 10px;
+}
+
+.comment-toggle {
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  align-self: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+
+.comment-toggle:hover {
+  text-decoration: underline;
+}
+
 .comment-text {
   margin-top: 5px;
   line-height: 1.4;
+  padding-left: 28px;
 }
 
 .response-list {
@@ -160,4 +191,3 @@ import { formatDate } from '@/utils.js';
   color: #f00;
 }
 </style>
-  
