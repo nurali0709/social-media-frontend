@@ -11,7 +11,6 @@
           <strong>{{ post.author_name }} {{ post.author_surname }}</strong>
         </h3>
         <div class="name-info">
-          <span class="dot">.</span>
           <span class="username">{{ post.author_username }}</span>
         </div>
       </div>
@@ -147,11 +146,6 @@ export default {
 
 .name {
   color: rgb(70, 47, 47);
-}
-
-.dot {
-  color: rgb(70, 47, 47);
-  margin-right: 5px; /* Adjust the right margin as needed */
 }
 
 .username {

@@ -3,18 +3,22 @@
     <h2>Search Results: </h2>
     <div v-for="result in searchData" :key="result.id" class="post">
       <router-link class="post-underline" :to="{ name: 'PostDetail', params: { postId: result.id } }">
-        <div class="post-header">
-          <h2>{{ result.title }}</h2>
-          <div class="post-meta">
-            <h1><strong>{{ result.author_name }} {{ result.author_surname }}</strong></h1>
+        <div class="post-meta">
+          <h3 class="name">
+            <strong>{{ result.author_name }} {{ result.author_surname }}</strong>
+          </h3>
+          <div class="name-info">
             <span class="username">{{ result.author_username }}</span>
           </div>
         </div>
+        <h2 class="title">{{ result.title }}</h2>
         <div class="post-content">
           <p class="truncate">{{ result.description }}</p>
         </div>
         <div class="post-footer">
-          <span class="posted-on">{{ formatDate(result.created_at) }}</span>
+          <div class="posted-on">
+            {{ formatDate(result.created_at) }}
+          </div>
           <div class="post-stats">
             <i class="far fa-eye"></i> {{ result.views }}
             <i class="far fa-thumbs-up"></i> {{ result.likes }}
@@ -108,17 +112,37 @@ export default {
 
 .post-meta {
   font-size: 14px;
-  color: #777;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 10px;
 }
 
-.post-meta .username {
-  color: gray;
-  margin-right: 800px;
+.name {
+  color: rgb(70, 47, 47);
+}
+
+.username {
+  color: rgb(70, 47, 47);
+}
+
+.name-info {
+  display: flex;
+  align-items: center;
+  margin-left: -810px;
+  margin-top: 20px;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: black;
 }
 
 .post-content {
   font-size: 16px;
   line-height: 1.6;
+  color: grey;
 }
 
 .post-footer {
@@ -126,7 +150,7 @@ export default {
   border-top: 1px solid #ddd;
   padding-top: 10px;
   display: flex;
-  justify-content: flex-end; /* Align stats to the right */
+  justify-content: flex-end;
   font-size: 14px;
   color: #555;
 }
@@ -135,7 +159,6 @@ export default {
   width: 100%;
 }
 
-/* Add Font Awesome icons styles */
 .post-footer i {
   margin-left: 5px;
 }
@@ -143,10 +166,6 @@ export default {
 .posted-on {
     margin-right: 600px;
     width: 100%;
-}
-
-.name {
-    margin-right: 800px;
 }
 
 .no-results {

@@ -183,6 +183,7 @@ export default {
   line-height: 1.6;
   height: 100px; /* Limit the height of the content */
   overflow: hidden;
+  color: grey;
 }
 
 .card-footer {
