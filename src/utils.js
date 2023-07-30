@@ -35,3 +35,37 @@ export function formatDate(date) {
         return [];
       });
   }
+
+export function fetchPostsOrderByLikes() {
+    return axios.get('http://192.168.1.106:8000/post/posts/order_likes')
+      .then(response => {
+        // Check if the response data is an array before returning the posts
+        if (Array.isArray(response.data)) {
+          return response.data;
+        } else {
+          console.error('Invalid data format: Expected an array of posts');
+          return [];
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching posts:', error);
+        return [];
+      });
+  }
+
+export function fetchPostsOrderByViews() {
+    return axios.get('http://192.168.1.106:8000/post/posts/order_views')
+      .then(response => {
+        // Check if the response data is an array before returning the posts
+        if (Array.isArray(response.data)) {
+          return response.data;
+        } else {
+          console.error('Invalid data format: Expected an array of posts');
+          return [];
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching posts:', error);
+        return [];
+      });
+  }

@@ -1,5 +1,10 @@
 <template>
   <div class="post-block">
+    <div class="order">
+      <button class="order-button" @click="fetchPostsOrderByLikes">Order by Likes</button>
+      <button class="order-button" @click="fetchPostsOrderByViews">Order by Views</button>
+      <button class="order-button" @click="fetchPosts">Order by Date</button>
+    </div>
     <router-link v-for="post in localPosts" :key="post.id" class="post" :to="{ name: 'PostDetail', params: { postId: post.id } }">
       <div class="post-meta">
         <h3 class="name">
@@ -31,7 +36,7 @@
 
 
 <script>
-import { fetchPosts } from '@/utils.js';
+import { fetchPosts, fetchPostsOrderByLikes, fetchPostsOrderByViews } from '@/utils.js';
 import { formatDate } from '@/utils.js';
 
 export default {
@@ -57,6 +62,24 @@ export default {
           console.error('Error fetching posts:', error);
         });
     },
+    fetchPostsOrderByLikes() {
+      fetchPostsOrderByLikes()
+        .then(posts => {
+          this.localPosts = posts;
+        })
+        .catch(error => {
+          console.error('Error fetching posts ordered by likes:', error);
+        });
+    },
+    fetchPostsOrderByViews() {
+      fetchPostsOrderByViews()
+        .then(posts => {
+          this.localPosts = posts;
+        })
+        .catch(error => {
+          console.error('Error fetching posts ordered by views:', error);
+        });
+    },
   },
   watch: {
     posts(newPosts) {
@@ -78,6 +101,30 @@ export default {
   margin: 20px 0;
   margin-left: 450px;
   max-width: 1000px;
+}
+
+.order {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.order-button {
+  background-color: #176B87;
+  color: #DAFFFB;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.order-button:hover {
+  background-color: #DAFFFB;
+  color: #176B87;
 }
 
 .post {
