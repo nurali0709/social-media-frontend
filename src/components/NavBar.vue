@@ -10,10 +10,11 @@
     </div>
     <div class="nav-menu" :class="{ active: navItemsActive }">
       <router-link to="/" class="home">Home</router-link>
-      <div class="login-register">
-        <router-link to="" class="button">Login</router-link>
-        <router-link to="" class="button">Register</router-link>
+      <div class="login-register" v-if="!isLoggedIn" >
+        <router-link to="/login" class="button">Login</router-link>
+        <router-link to="/register" class="button">Register</router-link>
       </div>
+      <router-link v-if="isLoggedIn" @click="logout" class="button">Logout</router-link>
       <!-- Other links here -->
     </div>
     <form @submit.prevent="searchPosts" class="search">
@@ -26,7 +27,12 @@
 </template>
   
 <script>
+import axios from 'axios';
+import { mapState, mapMutations } from 'vuex';
 export default {
+  computed: {
+    ...mapState(['isLoggedIn']), // Access the 'isLoggedIn' state from the store
+  },
   data() {
     return {
       searchInput: '',
@@ -41,9 +47,23 @@ export default {
         query: { q: this.searchInput },
       });
     },
+    ...mapMutations(['updateLoggedInStatus']),
     toggleNavItems() {
       // Toggle the navItemsActive property to show/hide navigation items
       this.navItemsActive = !this.navItemsActive;
+    },
+    logout() {
+      // Call the backend API to logout
+      axios.post('http://192.168.1.106:8000/auth/logout')
+        .then(() => {
+          // Upon successful logout, update the isLoggedIn state to false
+          this.updateLoggedInStatus(false);
+          // You may also clear any other user-related data or do additional tasks as needed.
+        })
+        .catch((error) => {
+          console.error('Logout failed:', error);
+          // Handle logout failure (e.g., show an error message)
+        });
     },
   },
   watch: {

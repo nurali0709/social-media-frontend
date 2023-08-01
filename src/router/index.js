@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import PostBlock from '@/components/PostBlock.vue';
 import PostDetail from '@/components/PostDetail.vue';
 import SearchResults from '@/components/SearchResults.vue';
+import LogIn from "@/components/LogIn.vue";
+import SignUp from "@/components/SignUp.vue";
+import LogOut from "@/components/LogOut.vue";
 
 const routes = [
   { 
@@ -17,7 +20,22 @@ const routes = [
     path: '/search-results',
     component: SearchResults,
     props: route => ({ searchQuery:  route.query.q })
-    }  
+    },
+  {
+    path: '/login',
+    component: LogIn,
+    name: 'Login'
+  },
+  {
+    path: '/register',
+    component: SignUp,
+    name: 'Register'
+  },
+  {
+    path: '/logout',
+    component: LogOut,
+    name: 'Logout'
+  }
 ];
 
 const router = createRouter({
