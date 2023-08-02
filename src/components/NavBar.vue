@@ -26,7 +26,7 @@
           </div>
           <!-- Profile Dropdown Menu -->
           <div class="profile-dropdown" v-if="profileMenuActive">
-            <router-link to="/settings">Settings</router-link>
+            <router-link :to="'/settings/' + userId">Settings</router-link>
             <router-link to="/profile">Profile</router-link>
             <router-link to="/logout" class="button">Logout</router-link>
           </div>
@@ -43,7 +43,6 @@
 </template>
   
 <script>
-
 export default {
   data() {
     return {
@@ -60,30 +59,32 @@ export default {
       });
     },
     toggleNavItems() {
-      // Toggle the navItemsActive to show/hide navigation items
       this.navItemsActive = !this.navItemsActive;
     },
     toggleProfileMenu() {
       this.profileMenuActive = !this.profileMenuActive;
     },
-    computed: {
-    // Retrieve the isLoggedIn state from the store
+  },
+  computed: {
     isLoggedIn() {
       return this.$store.state.isLoggedIn;
-      },
+    },
+    userId() {
+      return this.$store.state.userId;
     },
   },
   watch: {
     $route(to, from) {
-      // Clear the search input when the route changes
       if (to.path !== '/search-results' && from.path === '/search-results') {
         this.searchInput = '';
       }
     },
+    '$store.state.userId'(newUserId) {
+    console.log("NavBar - Watched userId:", newUserId);
+  },
   },
 };
 </script>
-
   
 <style scoped>
 

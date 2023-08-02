@@ -4,10 +4,14 @@ import axios from 'axios';
 const store = createStore({
   state: {
     isLoggedIn: false,
+    userId: null
   },
   mutations: {
     updateLoggedInStatus(state, isLoggedIn) {
       state.isLoggedIn = isLoggedIn;
+    },
+    updateUserId(state, userId) {
+      state.userId = userId;
     },
   },
   actions: {

@@ -32,6 +32,7 @@ import axios from 'axios';
             this.$cookies.set("access_token", response.data.jwt, "1d");
             // Update the isLoggedIn state in the store to true
             this.$store.commit("updateLoggedInStatus", true);
+            this.$store.commit("updateUserId", response.data.user.id); // Adjust the property accordingly based on the actual response from the backend
             // Redirect to the dashboard or any other protected page
             this.$router.push("/");
           })

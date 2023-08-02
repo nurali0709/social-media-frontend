@@ -5,6 +5,8 @@ import SearchResults from '@/components/SearchResults.vue';
 import LogIn from "@/components/LogIn.vue";
 import SignUp from "@/components/SignUp.vue";
 import LogOut from "@/components/LogOut.vue";
+import UserSettings from "@/components/UserSettings.vue";
+import store from '@/store/index.js';
 
 const routes = [
   { 
@@ -35,6 +37,22 @@ const routes = [
     path: '/logout',
     component: LogOut,
     name: 'Logout'
+  },
+  {
+    path: '/settings/:userId',
+    component: UserSettings,
+    name: 'Settings',
+    // Add the beforeEnter guard
+    beforeEnter: (to, from, next) => {
+      const isLoggedIn = store.state.isLoggedIn; // Get the isLoggedIn state from Vuex store
+      if (isLoggedIn) {
+        // User is authenticated, allow access to the "Settings" page
+        next();
+      } else {
+        // User is not authenticated, redirect to the login page or show an error message
+        next('/login'); // Replace '/login' with the path to your login page
+      }
+    },
   }
 ];
 
