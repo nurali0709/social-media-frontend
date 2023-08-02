@@ -31,6 +31,8 @@ import axios from 'axios';
           .then((response) => {
             // Save the token received in the cookie
             this.$cookies.set("access_token", response.data.jwt, "1d");
+            // Update the isLoggedIn state in the store to true
+            this.$store.commit("updateLoggedInStatus", true);
             // Redirect to the dashboard or any other protected page
             this.$router.push("/");
           })
