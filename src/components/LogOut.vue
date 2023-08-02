@@ -10,10 +10,15 @@ export default {
   methods: {
     async logout() {
       try {
-        await this.$store.dispatch("logout"); // Call the logout action in the store
-        this.$cookies.remove("access_token"); // Remove the access token from the cookie
-        // Redirect to the login page or any other public page
+        await this.$store.dispatch("logout");
+        this.$cookies.remove("access_token");
+  
         this.$router.push("/login");
+
+        // Wait for a short delay (e.g., 100ms) before reloading the page
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
       } catch (error) {
         console.error(error);
         // Handle logout failure (e.g., show an error message)
