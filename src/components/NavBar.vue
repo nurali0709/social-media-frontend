@@ -15,7 +15,6 @@
         <router-link to="/signup" class="button">Register</router-link>
       </div>
       <div v-else>
-        <router-link to="/logout" class="button">Logout</router-link>
         <div class="menu-toggle"></div>
         <div class="profile" @click="toggleProfileMenu">
           <div class="user">
@@ -27,8 +26,9 @@
           </div>
           <!-- Profile Dropdown Menu -->
           <div class="profile-dropdown" v-if="profileMenuActive">
-            <router-link to="/account-settings">Account Settings</router-link>
+            <router-link to="/settings">Settings</router-link>
             <router-link to="/profile">Profile</router-link>
+            <router-link to="/logout" class="button">Logout</router-link>
           </div>
         </div>
       </div>
@@ -197,17 +197,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 50px;
-}
-
-.menu-toggle::before {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 4px;
-    background: #000;
-    box-shadow: 0 8px 0 #000,
-                0 -8px 0 #000;
 }
 
 .profile {
@@ -218,6 +207,8 @@ nav {
     gap: 12px;
     cursor: pointer;
     text-align: end;
+    right: -1100px;
+    top: -27px;
 }
 
 .profile h3 {
