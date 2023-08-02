@@ -14,7 +14,24 @@
         <router-link to="/login" class="button">Login</router-link>
         <router-link to="/signup" class="button">Register</router-link>
       </div>
-      <router-link v-else to="/logout" class="button">Logout</router-link>
+      <div v-else>
+        <router-link to="/logout" class="button">Logout</router-link>
+        <div class="menu-toggle"></div>
+        <div class="profile" @click="toggleProfileMenu">
+          <div class="user">
+            <h3>Katherine Cooper</h3>
+            <p>@probablykat66</p>
+          </div>
+          <div class="img-box">
+            <img src="https://i.postimg.cc/BvNYhMHS/user-img.jpg" alt="some user image">
+          </div>
+          <!-- Profile Dropdown Menu -->
+          <div class="profile-dropdown" v-if="profileMenuActive">
+            <router-link to="/account-settings">Account Settings</router-link>
+            <router-link to="/profile">Profile</router-link>
+          </div>
+        </div>
+      </div>
     </div>
     <form @submit.prevent="searchPosts" class="search">
       <input v-model="searchInput" type="text" placeholder="Search..." class="search-input">
@@ -32,6 +49,7 @@ export default {
     return {
       searchInput: '',
       navItemsActive: false,
+      profileMenuActive: false,
     };
   },
   methods: {
@@ -44,6 +62,9 @@ export default {
     toggleNavItems() {
       // Toggle the navItemsActive to show/hide navigation items
       this.navItemsActive = !this.navItemsActive;
+    },
+    toggleProfileMenu() {
+      this.profileMenuActive = !this.profileMenuActive;
     },
     computed: {
     // Retrieve the isLoggedIn state from the store
@@ -166,6 +187,67 @@ nav {
     background: #DAFFFB;
     color: #176B87;
     transition: 1s;
+}
+
+.menu-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: not-allowed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 50px;
+}
+
+.menu-toggle::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 4px;
+    background: #000;
+    box-shadow: 0 8px 0 #000,
+                0 -8px 0 #000;
+}
+
+.profile {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    text-align: end;
+}
+
+.profile h3 {
+    text-align: end;
+    line-height: 1;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.profile p {
+    line-height: 1;
+    font-size: 14px;
+    opacity: .6;
+}
+
+.profile .img-box {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile .img-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .search {
