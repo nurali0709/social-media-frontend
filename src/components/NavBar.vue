@@ -12,7 +12,7 @@
       <router-link to="/" class="home">Home</router-link>
       <div class="login-register" v-if="!$store.state.isLoggedIn">
         <router-link to="/login" class="button">Login</router-link>
-        <router-link to="/register" class="button">Register</router-link>
+        <router-link to="/signup" class="button">Register</router-link>
       </div>
       <router-link v-else to="/logout" class="button">Logout</router-link>
     </div>

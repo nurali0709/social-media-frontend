@@ -27,9 +27,9 @@ const routes = [
     name: 'Login'
   },
   {
-    path: '/register',
+    path: '/signup',
     component: SignUp,
-    name: 'Register'
+    name: 'Signup'
   },
   {
     path: '/logout',
