@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import axios from 'axios';
   export default {
     data() {
       return {
@@ -26,7 +25,7 @@ import axios from 'axios';
     methods: {
       login() {
         // Call the backend API to log in
-        axios.post("http://192.168.1.106:8000/auth/login", this.user)
+        this.$axios.post("http://192.168.1.106:8000/auth/login", this.user)
           .then((response) => {
             // Save the token received in the cookie
             this.$cookies.set("access_token", response.data.jwt, "1d");

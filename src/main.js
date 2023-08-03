@@ -14,15 +14,6 @@ const axiosInstance = axios.create({
 const app = createApp(App);
 app.use(VueCookies);
 
-// Check if the token is present in the cookie
-const token = app.config.globalProperties.$cookies.get('access_token');
-if (token) {
-  // Update the isLoggedIn state in the store to true
-  store.commit('updateLoggedInStatus', true);
-  // Set the authorization header for all API requests
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
-
 app.use(router);
 // Inject the configured axios instance into the Vue app as $axios
 app.config.globalProperties.$axios = axiosInstance;
