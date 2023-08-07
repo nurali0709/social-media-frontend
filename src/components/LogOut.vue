@@ -10,15 +10,12 @@ export default {
   methods: {
     logout() {
       try {
-        this.$axios.post("http://192.168.1.106:8000/auth/logout");
+        this.$axios.post("http://192.168.1.106:8000/auth/logout", { withCredentials: true });
 
         // Update the isLoggedIn state in the store to false
         this.$store.commit("updateLoggedInStatus", false);
-
-        // Remove the access_token cookie
-        this.$cookies.remove("access_token");
-
-        // Redirect to the login page
+        // this.$cookies.remove("access_token");
+        // // Redirect to the login page
         this.$router.push("/login");
 
         // Wait for a short delay (e.g., 100ms) before reloading the page
