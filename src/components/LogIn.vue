@@ -24,13 +24,13 @@
     },
     methods: {
       login() {
-        // Call the backend API to log in
-        this.$axios.post("http://192.168.1.106:8000/auth/login", this.user, { withCredentials: true })
+        this.$axios.post("http://192.168.1.106:8000/auth/login", this.user)
           .then((response) => {
-            // Save the token received in the cookie
-            // this.$cookies.set("access_token", response.data.jwt, "1d");
+            const token = response.data.jwt;
+            localStorage.setItem("jwt", token);
+
             this.$store.commit("updateLoggedInStatus", true);
-            this.$store.commit("updateUserId", response.data.user.id); // Adjust the property accordingly based on the actual response from the backend
+            this.$store.commit("updateUserId", response.data.user.id);
 
             this.$router.push("/");
           })

@@ -9,13 +9,11 @@ import axios from 'axios';
 const axiosInstance = axios.create({
   baseURL: 'http://192.168.1.106:8000',
   withCredentials: true,
-  cookies: true
 });
 
 const app = createApp(App);
 app.use(VueCookies);
 app.use(router);
-// Inject the configured axios instance into the Vue app as $axios
 app.config.globalProperties.$axios = axiosInstance;
 
 app.use(store);

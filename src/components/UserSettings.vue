@@ -40,8 +40,18 @@
     },
     methods: {
       updateUser() {
-        const userId = this.$route.params.userId; // Make sure you have userId parameter in your route
-        axios.put(`http://127.0.0.1:8000/auth/users/${userId}/update`, this.userData)
+        const token = localStorage.getItem("jwt");
+        axios.defaults.headers.common['Authorization'] = token
+
+        const userId = this.$route.params.userId;
+        axios.put(`http://127.0.0.1:8000/auth/users/${userId}/update`, this.userData, {
+          data: {
+            token: token,
+          },
+          headers: {
+            Authorization: token,
+          },
+        })
           .then((response) => {
             // Handle success
             console.log("User data updated successfully:", response.data);

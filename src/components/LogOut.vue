@@ -6,22 +6,27 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   methods: {
     logout() {
       try {
-        this.$axios.post("http://192.168.1.106:8000/auth/logout", { withCredentials: true });
+        const token = localStorage.getItem("jwt");
+        axios.defaults.headers.common['Authorization'] = token
+        axios.post("http://192.168.1.106:8000/auth/logout", {
+          data: {
+            token: token,
+          },
+          headers: {
+            Authorization: token,
+          },
+        });
 
-        // Update the isLoggedIn state in the store to false
+        localStorage.removeItem("jwt");
+
         this.$store.commit("updateLoggedInStatus", false);
-        // this.$cookies.remove("access_token");
-        // // Redirect to the login page
         this.$router.push("/login");
 
-        // Wait for a short delay (e.g., 100ms) before reloading the page
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 100);
       } catch (error) {
         console.error(error);
         // Handle logout failure (e.g., show an error message)
