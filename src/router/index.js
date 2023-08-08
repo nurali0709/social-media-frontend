@@ -6,6 +6,7 @@ import LogIn from "@/components/LogIn.vue";
 import SignUp from "@/components/SignUp.vue";
 import LogOut from "@/components/LogOut.vue";
 import UserSettings from "@/components/UserSettings.vue";
+import CreatePost from "@/components/CreatePost.vue"
 import store from '@/store/index.js';
 
 const routes = [
@@ -53,6 +54,11 @@ const routes = [
         next('/login'); // Replace '/login' with the path to your login page
       }
     },
+  },
+  {
+    path: '/create-post',
+    component: CreatePost,
+    name: 'CreatePost'
   }
 ];
 

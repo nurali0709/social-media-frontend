@@ -13,6 +13,12 @@ export default {
   components: {
     NavBar,
   },
+  created() {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      this.$store.commit("updateLoggedInStatus", true);
+    }
+  },
   data() {
     return {
       searchData: null,

@@ -15,6 +15,7 @@
         <router-link to="/signup" class="button">Register</router-link>
       </div>
       <div v-else>
+        <router-link to="/create-post" class="button">Create Post</router-link>
         <div class="menu-toggle"></div>
         <div class="profile" @click="toggleProfileMenu">
           <div class="user">
@@ -24,7 +25,6 @@
           <div class="img-box">
             <img src="https://i.postimg.cc/BvNYhMHS/user-img.jpg" alt="some user image">
           </div>
-          <!-- Profile Dropdown Menu -->
           <div class="profile-dropdown" v-if="profileMenuActive">
             <router-link :to="'/settings/' + userId">Settings</router-link>
             <router-link to="/profile">Profile</router-link>

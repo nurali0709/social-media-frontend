@@ -9,11 +9,12 @@
 import axios from 'axios';
 export default {
   methods: {
-    logout() {
+    async logout() {
       try {
         const token = localStorage.getItem("jwt");
         axios.defaults.headers.common['Authorization'] = token
-        axios.post("http://192.168.1.106:8000/auth/logout", {
+        
+        await axios.post("http://192.168.1.106:8000/auth/logout", {
           data: {
             token: token,
           },
