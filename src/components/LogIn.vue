@@ -29,8 +29,11 @@
             const token = response.data.jwt;
             localStorage.setItem("jwt", token);
 
+            localStorage.setItem("userData", JSON.stringify(response.data.user));
+
             this.$store.commit("updateLoggedInStatus", true);
             this.$store.commit("updateUserId", response.data.user.id);
+            this.$store.commit("updateUserData", response.data.user);
 
             this.$router.push("/");
           })

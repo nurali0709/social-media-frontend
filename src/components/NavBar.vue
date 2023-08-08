@@ -15,19 +15,16 @@
         <router-link to="/signup" class="button">Register</router-link>
       </div>
       <div v-else>
-        <router-link to="/create-post" class="button">Create Post</router-link>
         <div class="menu-toggle"></div>
         <div class="profile" @click="toggleProfileMenu">
           <div class="user">
-            <h3>Katherine Cooper</h3>
-            <p>@probablykat66</p>
-          </div>
-          <div class="img-box">
-            <img src="https://i.postimg.cc/BvNYhMHS/user-img.jpg" alt="some user image">
+            <h3>{{ userData.name }} {{ userData.surname }}</h3>
+            <p>{{ userData.username }}</p>
           </div>
           <div class="profile-dropdown" v-if="profileMenuActive">
             <router-link :to="'/settings/' + userId">Settings</router-link>
             <router-link to="/profile">Profile</router-link>
+            <router-link to="/create-post">Create Post</router-link>
             <router-link to="/logout" class="button">Logout</router-link>
           </div>
         </div>
@@ -71,6 +68,9 @@ export default {
     },
     userId() {
       return this.$store.state.userId;
+    },
+    userData() {
+      return this.$store.state.userData;
     },
   },
   watch: {
@@ -190,6 +190,10 @@ nav {
     transition: 1s;
 }
 
+.create-post {
+  background-color: black;
+}
+
 .menu-toggle {
     position: relative;
     width: 40px;
@@ -223,23 +227,6 @@ nav {
     line-height: 1;
     font-size: 14px;
     opacity: .6;
-}
-
-.profile .img-box {
-    position: relative;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.profile .img-box img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .search {

@@ -24,6 +24,7 @@ export default {
         });
 
         localStorage.removeItem("jwt");
+        localStorage.removeItem("userData");
 
         this.$store.commit("updateLoggedInStatus", false);
         this.$router.push("/login");

@@ -15,8 +15,11 @@ export default {
   },
   created() {
     const token = localStorage.getItem("jwt");
-    if (token) {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (token && userData) {
       this.$store.commit("updateLoggedInStatus", true);
+      this.$store.commit("updateUserId", userData.id);
+      this.$store.commit("updateUserData", userData);
     }
   },
   data() {

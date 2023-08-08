@@ -13,6 +13,9 @@ const store = createStore({
     updateUserId(state, userId) {
       state.userId = userId;
     },
+    updateUserData(state, userData) {
+      state.userData = userData;
+    }
   },
 });
 
