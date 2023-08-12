@@ -14,7 +14,7 @@ export default {
         const token = localStorage.getItem("jwt");
         axios.defaults.headers.common['Authorization'] = token
         
-        await axios.post("http://192.168.1.106:8000/auth/logout", {
+        await axios.post("http://127.0.0.1:8000/auth/logout", {
           data: {
             token: token,
           },

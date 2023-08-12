@@ -37,12 +37,12 @@ import axios from 'axios';
     },
     methods: {
       register() {
-        axios.post("http://192.168.1.106:8000/auth/signup", this.user)
+        axios.post("http://127.0.0.1:8000/auth/signup", this.user)
           .then((response) => {
             // Save the token received in the cookie
             this.$cookies.set("access_token", response.data.jwt, { expires: 1 });
             this.$store.commit("updateLoggedInStatus", true);
-            // Redirect to the dashboard or any other protected page
+            // Redirect to the home page
             this.$router.push("/");
           })
           .catch((error) => {

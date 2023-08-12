@@ -81,7 +81,7 @@ export default {
     fetchPostDetails() {
       const postId = this.$route.params.postId;
       axios
-        .get(`http://192.168.1.106:8000/post/posts/${postId}/view`)
+        .get(`http://127.0.0.1:8000/post/posts/${postId}/view`)
         .then(response => {
           this.post = response.data.post;
           this.recommendations = response.data.recommendations;

@@ -65,7 +65,7 @@ export default {
   methods: {
     formatDate,
     fetchSearchResults() {
-      const url = `http://192.168.1.106:8000/post/search?q=${this.searchQuery}`;
+      const url = `http://127.0.0.1:8000/post/search?q=${this.searchQuery}`;
       axios
         .get(url)
         .then(response => {

@@ -24,7 +24,7 @@
     },
     methods: {
       login() {
-        this.$axios.post("http://192.168.1.106:8000/auth/login", this.user)
+        this.$axios.post("http://127.0.0.1:8000/auth/login", this.user)
           .then((response) => {
             const token = response.data.jwt;
             localStorage.setItem("jwt", token);
