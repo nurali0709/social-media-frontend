@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import api from "@/api";
 import { formatDate } from '@/utils.js';
 import CommentsModal from '@/components/CommentsModal.vue';
 
@@ -80,8 +80,8 @@ export default {
     formatDate,
     fetchPostDetails() {
       const postId = this.$route.params.postId;
-      axios
-        .get(`http://127.0.0.1:8000/post/posts/${postId}/view`)
+      api
+        .get(`/post/posts/${postId}/view`)
         .then(response => {
           this.post = response.data.post;
           this.recommendations = response.data.recommendations;
