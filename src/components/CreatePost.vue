@@ -10,7 +10,7 @@
 </template>
   
 <script>
-  import axios from 'axios';
+import api from "@/api";
   
   export default {
     data() {
@@ -25,8 +25,8 @@
           title: this.title,
           description: this.description,
         };
-        axios.post(
-          'http://127.0.0.1:8000/post/create_post',
+        api.post(
+          '/post/create_post',
           data,
           {
             headers: {
