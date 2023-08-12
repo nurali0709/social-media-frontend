@@ -1,20 +1,20 @@
 <template>
     <div class="register">
       <form @submit.prevent="register" class="register-form">
-        <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required>
-        <br>
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required>
-        <br>
-        <label for="email">Email</label>
-        <input type="email" id="email" v-model="user.email" required>
-        <br>
         <label for="name">Name</label>
         <input type="text" id="name" v-model="user.name" required>
         <br>
         <label for="surname">Surname</label>
         <input type="text" id="surname" v-model="user.surname" required>
+        <br>
+        <label for="email">Email</label>
+        <input type="email" id="email" v-model="user.email" required>
+        <br>
+        <label for="username">Username</label>
+        <input type="text" id="username" v-model="user.username" required>
+        <br>
+        <label for="password">Password</label>
+        <input type="password" id="password" v-model="user.password" required>
         <br>
         <button type="submit">Register</button>
       </form>
@@ -22,7 +22,6 @@
 </template>
   
 <script>
-import axios from 'axios';
   export default {
     data() {
       return {
@@ -37,12 +36,17 @@ import axios from 'axios';
     },
     methods: {
       register() {
-        axios.post("http://127.0.0.1:8000/auth/signup", this.user)
+        this.$axios.post("http://127.0.0.1:8000/auth/signup", this.user)
           .then((response) => {
-            // Save the token received in the cookie
-            this.$cookies.set("access_token", response.data.jwt, { expires: 1 });
+            const token = response.data.jwt;
+            localStorage.setItem("jwt", token);
+
+            localStorage.setItem("userData", JSON.stringify(response.data.user));
+
             this.$store.commit("updateLoggedInStatus", true);
-            // Redirect to the home page
+            this.$store.commit("updateUserId", response.data.user.id);
+            this.$store.commit("updateUserData", response.data.user);
+
             this.$router.push("/");
           })
           .catch((error) => {

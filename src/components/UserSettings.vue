@@ -17,9 +17,9 @@
         <button type="submit">Update</button>
       </form>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import axios from 'axios';
   
   export default {
@@ -65,5 +65,5 @@
       },
     },
   };
-  </script>
+</script>
   
