@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/api";
 
 export function formatDate(date) {
     if (!date) {
@@ -20,7 +20,7 @@ export function formatDate(date) {
   }
 
   export function fetchPosts() {
-    return axios.get('http://127.0.0.1:8000/post/posts')
+    return api.get('/post/posts')
       .then(response => {
         // Check if the response data is an array before returning the posts
         if (Array.isArray(response.data)) {
@@ -37,7 +37,7 @@ export function formatDate(date) {
   }
 
 export function fetchPostsOrderByLikes() {
-    return axios.get('http://127.0.0.1:8000/post/posts/order_likes')
+    return api.get('/post/posts/order_likes')
       .then(response => {
         // Check if the response data is an array before returning the posts
         if (Array.isArray(response.data)) {
@@ -54,7 +54,7 @@ export function fetchPostsOrderByLikes() {
   }
 
 export function fetchPostsOrderByViews() {
-    return axios.get('http://127.0.0.1:8000/post/posts/order_views')
+    return api.get('/post/posts/order_views')
       .then(response => {
         // Check if the response data is an array before returning the posts
         if (Array.isArray(response.data)) {
