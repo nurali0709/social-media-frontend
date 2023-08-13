@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import PostBlock from '@/components/PostBlock.vue';
-import PostDetail from '@/components/PostDetail.vue';
+import PostBlock from '@/components/posts/PostBlock.vue';
+import PostDetail from '@/components/posts/PostDetail.vue';
 import SearchResults from '@/components/SearchResults.vue';
-import LogIn from "@/components/LogIn.vue";
-import SignUp from "@/components/SignUp.vue";
-import LogOut from "@/components/LogOut.vue";
-import UserSettings from "@/components/UserSettings.vue";
-import CreatePost from "@/components/CreatePost.vue"
+import LogIn from "@/components/auth/LogIn.vue";
+import SignUp from "@/components/auth/SignUp.vue";
+import LogOut from "@/components/auth/LogOut.vue";
+import UserSettings from "@/components/auth/UserSettings.vue";
+import CreatePost from "@/components/posts/CreatePost.vue"
 import store from '@/store/index.js';
 
 const routes = [
