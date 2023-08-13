@@ -10,6 +10,7 @@
     </div>
     <div class="nav-menu" :class="{ active: navItemsActive }">
       <router-link to="/" class="home">Home</router-link>
+      <router-link to="/create-post" class="button" v-if="$store.state.isLoggedIn">Create Post</router-link>
       <div class="login-register" v-if="!$store.state.isLoggedIn">
         <router-link to="/login" class="button">Login</router-link>
         <router-link to="/signup" class="button">Register</router-link>
@@ -24,7 +25,6 @@
           <div class="profile-dropdown" v-if="profileMenuActive">
             <router-link :to="'/settings/' + userId">Settings</router-link>
             <router-link to="/profile">Profile</router-link>
-            <router-link to="/create-post">Create Post</router-link>
             <router-link to="/logout" class="button">Logout</router-link>
           </div>
         </div>
@@ -192,6 +192,7 @@ nav {
 
 .create-post {
   background-color: black;
+  bottom: 500px;
 }
 
 .menu-toggle {
