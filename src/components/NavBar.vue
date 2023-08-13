@@ -23,8 +23,8 @@
             <p>{{ userData.username }}</p>
           </div>
           <div class="profile-dropdown" v-if="profileMenuActive">
-            <router-link :to="'/settings/' + userId">Settings</router-link>
-            <router-link to="/profile">Profile</router-link>
+            <router-link :to="'/settings/' + userId" class="settings">Settings</router-link>
+            <router-link to="/profile" class="settings">Profile</router-link>
             <router-link to="/logout" class="button">Logout</router-link>
           </div>
         </div>
@@ -190,9 +190,8 @@ nav {
     transition: 1s;
 }
 
-.create-post {
-  background-color: black;
-  bottom: 500px;
+.settings:hover {
+  border-bottom: 2px solid #DAFFFB;
 }
 
 .menu-toggle {
